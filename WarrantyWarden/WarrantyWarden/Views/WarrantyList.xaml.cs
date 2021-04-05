@@ -26,7 +26,7 @@ namespace WarrantyWarden.Views
                 {
                     warranty.LargestUnit = "Years";
                     warranty.Priority = 1;
-                    warranty.LargestUnitRemaining = Convert.ToInt32(Math.Floor(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25)));
+                    warranty.LargestUnitRemaining = Convert.ToInt32(Math.Ceiling(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25)));
 
                 } else if (Convert.ToInt32(Math.Floor(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25 / 12))) > 0)
                 {
@@ -111,7 +111,7 @@ namespace WarrantyWarden.Views
                 {
                     warranty.LargestUnit = "Years";
                     warranty.Priority = 1;
-                    warranty.LargestUnitRemaining = Convert.ToInt32(Math.Floor(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25)));
+                    warranty.LargestUnitRemaining = Convert.ToInt32(Math.Ceiling(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25)));
 
                 }
                 else if (Convert.ToInt32(Math.Floor(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25 / 12))) > 0)

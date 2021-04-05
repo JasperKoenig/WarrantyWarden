@@ -61,7 +61,16 @@
                                                  Orientation="Horizontal">
                                         <Label Text="Ends:"
                                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                               FontSize="13" />
+                                               FontSize="13" >
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                             Binding="{Binding Priority}"
+                                                             Value="0"> 
+                                                    <Setter Property="Text"
+                                                            Value="Ended:"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
 
                                         <Label Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
                                                Style="{DynamicResource ListItemDetailTextStyle}"

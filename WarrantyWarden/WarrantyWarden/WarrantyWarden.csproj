@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Airborne Apps</Company>
+    <Product>Warranty Warden</Product>
+    <Authors>Jasper Koenig</Authors>
+    <PackageId>WarrantyWarden</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,11 +25,14 @@
     <Compile Update="AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ViewWarranty.xaml.cs">
+      <DependentUpon>ViewWarranty.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddWarranty.xaml.cs">
       <DependentUpon>AddWarranty.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\CalendarSync.xaml.cs">
-      <DependentUpon>CalendarSync.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\WarrantyList.xaml.cs">
       <DependentUpon>WarrantyList.xaml</DependentUpon>
@@ -45,7 +52,7 @@
     <EmbeddedResource Update="Views\AddWarranty.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CalendarSync.xaml">
+    <EmbeddedResource Update="Views\Notifications.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\WarrantyList.xaml">
