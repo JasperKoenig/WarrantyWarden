@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WarrantyWarden.Views.AddWarranty">
+             x:Class="WarrantyWarden.Views.AddWarranty"
+             BackgroundColor="AliceBlue">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -10,76 +11,116 @@
     </ContentPage.Padding>
 
     <StackLayout Margin="10">
-        <Entry Text="{Binding Product}"
-               x:Name="productName"
-               Style="{DynamicResource TitleStyle}"
-               Margin="30, 10"
-               HorizontalTextAlignment="Center" />
+        <Frame Grid.Column="0"
+               CornerRadius="10"
+               Padding="8">
+            <Entry Text="{Binding Product}"
+                   x:Name="productName"
+                   Placeholder="Product Name"
+                   Style="{DynamicResource TitleStyle}"
+                   Margin="30, 10"
+                   HorizontalTextAlignment="Center" />
+        </Frame>
 
-        <Label Text="Start Date:" />
+        <Frame Grid.Column="0"
+               CornerRadius="10"
+               Padding="12">
+            <StackLayout>
+                <Label Text="Start Date:" />
 
-        <DatePicker x:Name="startDatePicker"
+                <DatePicker x:Name="startDatePicker"
                     Format="D"
                     Margin="30, 0, 0, 0"
                     Date="{Binding StartDate}"
                     DateSelected="OnDateSelected" />
 
-        <Label Text="Remember, your warranty may start from date of purchase or date recieved."
+                <Label Text="Remember, your warranty may start from date of purchase or date recieved."
                Margin="30, 0, 0, 20" />
+            </StackLayout>
+        </Frame>
 
-        <Label Text="Coverage:" />
-
-        <StackLayout Orientation="Horizontal"
+        <Frame Grid.Column="0"
+               CornerRadius="10"
+               Padding="12">
+            <StackLayout>
+                <Label Text="Coverage:" />
+                
+                <StackLayout Orientation="Horizontal"
                      Margin="0, 10, 0, 0"
                      HorizontalOptions="Center">
 
-            <StackLayout>
-                <Label x:Name="durationYearsLabel"
+                <StackLayout>
+                    <Label x:Name="durationYearsLabel"
                        Text="Years" 
                        HorizontalTextAlignment="Center" />
 
-                <Stepper x:Name="durationYears"
+                    <Stepper x:Name="durationYears"
                     Maximum="100"
                     Increment="1"
                     HorizontalOptions="Center"
                     ValueChanged="OnYearChanged" />
 
-            </StackLayout>
+                </StackLayout>
 
-            <StackLayout>
-                <Label x:Name="durationMonthsLabel"
+                <StackLayout>
+                    <Label x:Name="durationMonthsLabel"
                        Text="Months" 
                        HorizontalTextAlignment="Center" />
 
-                <Stepper x:Name="durationMonths"
+                    <Stepper x:Name="durationMonths"
                     Maximum="12"
                     Increment="1"
                     HorizontalOptions="Center"
                     ValueChanged="OnMonthChanged" />
 
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+            </StackLayout>
+        </Frame>
 
-        <Label Text="Your warranty ends on:" 
-               Margin="0, 20, 0, 0"/>
+        <Frame Grid.Column="0"
+               CornerRadius="10"
+               Padding="12">
+            <StackLayout>
+                <Label Text="Your warranty ends on:"/>
 
-        <Label x:Name="resultLabel"
-               Text="{Binding EndDate}"
-               FontSize="40"
-               Margin="0, 40, 0, 0"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center" />
+                <Label x:Name="resultLabel"
+                       Text="{Binding EndDate}"
+                       FontSize="30"
+                       Margin="0, 20, 0, 0"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </Frame>
+
+        <Button Text="Add proof of Purchase" 
+                Margin="0, 0, 0, 0"
+                Clicked="OnProofButtonClicked" 
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand"
+                TextColor="Gray"
+                    BackgroundColor="White"/>
+        
+        <Button Text="Add Warranty Card" 
+                Margin="0, 0, 0, 0"
+                Clicked="OnWarrantyButtonClicked" 
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                TextColor="Gray"
+                BackgroundColor="White"/>
 
         <StackLayout Orientation="Horizontal"
-                     VerticalOptions="EndAndExpand"
-                     Margin="0, 0, 0, 0">
+                     VerticalOptions="End">
             <Button Text="Cancel" 
                     Clicked="OnCancelButtonClicked" 
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="Gray"
+                    BackgroundColor="White"/>
             <Button Text="Save" 
                     Clicked="OnSaveButtonClicked" 
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="Gray"
+                    BackgroundColor="White"/>
         </StackLayout>
-
     </StackLayout>
 </ContentPage>

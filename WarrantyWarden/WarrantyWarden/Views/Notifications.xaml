@@ -1,12 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WarrantyWarden.Views.Page1">
+             x:Class="WarrantyWarden.Views.Notifications"
+             BackgroundColor="AliceBlue">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical"
+                     Margin="20">
+            <Label Text="How many months before your warranty ends do you want to be notified?"
+                   Margin="60, 50, 60, 0"
+                   FontSize="25"
+                   Style="{DynamicResource TitleStyle}"
+                   HorizontalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"/>
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label x:Name="Months"
+                       Text="Months" 
+                       FontSize="20"
+                       HorizontalTextAlignment="Center" />
+                <Stepper x:Name="MonthsStepper"
+                    Maximum="100"
+                    Increment="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    ValueChanged="OnMonthChanged" />
+            </StackLayout>
+            <StackLayout>
+                <Button Text="Save" 
+                        Clicked="OnSaveButtonClicked" 
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="EndAndExpand"/>
+                <Button Text="Cancel notifications" 
+                        Clicked="OnCancelButtonClicked" 
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="EndAndExpand"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

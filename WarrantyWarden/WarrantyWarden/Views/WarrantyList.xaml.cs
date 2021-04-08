@@ -67,7 +67,7 @@ namespace WarrantyWarden.Views
         {
             if (e.SelectedItem != null)
             {
-                await Navigation.PushAsync(new AddWarranty
+                await Navigation.PushAsync(new ViewWarranty
                 {
                     BindingContext = e.SelectedItem as Warranty
                 });

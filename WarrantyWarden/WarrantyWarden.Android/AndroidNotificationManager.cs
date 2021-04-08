@@ -102,6 +102,12 @@ namespace WarrantyWarden.Droid
             alarmManager.Cancel(pendingIntent);
         }
 
+        public void DeleteAllNotifications()
+        {
+            var notificationManager = NotificationManagerCompat.From(Android.App.Application.Context);
+            notificationManager.CancelAll();
+        }
+
         void CreateNotificationChannel()
         {
             manager = (NotificationManager)AndroidApp.Context.GetSystemService(AndroidApp.NotificationService);

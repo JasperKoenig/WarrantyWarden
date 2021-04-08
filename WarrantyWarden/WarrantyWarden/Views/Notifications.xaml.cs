@@ -33,15 +33,22 @@ namespace WarrantyWarden.Views
 
             var warranties = await database.GetItemsAsync();
 
+
             foreach (Warranty warranty in warranties)
             {
                 if (warranty.Priority != 0)
                 {
                     string title = "Warranty Warden";
                     string message = $"Your {warranty.Product} warranty will expire in less than {Months.Text}";
+                    notificationManager.DeleteAllNotifications();
                     notificationManager.SendNotification(title, message, (warranty.EndDate.AddMonths(Convert.ToInt32(MonthsStepper.Value) * -1)));
                 }
             }
+        }
+
+        public void OnCancelButtonClicked(object sender, EventArgs e)
+        {
+            notificationManager.DeleteAllNotifications();
         }
     }
 }
