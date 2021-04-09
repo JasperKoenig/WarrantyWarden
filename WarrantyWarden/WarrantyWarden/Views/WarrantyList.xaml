@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
              x:Class="WarrantyWarden.Views.WarrantyList"
-             BackgroundColor="AliceBlue">
+             BackgroundColor="{StaticResource Background}"
+             Title="Warranties">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Clicked="OnItemAdded">
             <ToolbarItem.IconImageSource>
-                <OnPlatform x:TypeArguments="ImageSource">
-                    <On Platform="Android, UWP" Value="icon_plus.png" />
-                </OnPlatform>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeRegular}"
+                                 Glyph="&#xf0fe;"
+                                 Size="22" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -29,124 +30,68 @@
                     </ViewCell.ContextActions>
 
                     <Frame CornerRadius="10"
-                           Padding="0"
+                           Padding="10"
                            HasShadow="True"
                            Margin="0,5,0,5">
-                        <AbsoluteLayout HorizontalOptions="FillAndExpand" 
-                                    VerticalOptions="FillAndExpand">
-                            <BoxView AbsoluteLayout.LayoutBounds="0.5, 0.5, -1, -1" 
-                                     AbsoluteLayout.LayoutFlags="PositionProportional"          
-                                     BackgroundColor="Gray"
-                                     HeightRequest="100"
-                                     WidthRequest="400"
-                                     IsVisible="False">
-                                <BoxView.Triggers>
-                                    <DataTrigger TargetType="BoxView"
-                                                 Binding="{Binding Priority}"
-                                                 Value="0">
-                                        <Setter Property="IsVisible"
-                                                Value="True"/>
-                                    </DataTrigger>
-                                </BoxView.Triggers>
-                            </BoxView>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             <StackLayout>
-                                <StackLayout Orientation="Horizontal"
-                                             AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
-                                             AbsoluteLayout.LayoutFlags="All">
-                                    <StackLayout Margin="20,0,0,0" 
-                                                 Orientation="Vertical" 
-                                                 VerticalOptions="FillAndExpand"
-                                                 x:Name="ProductAndEnd">
-                                        <Label Text="{Binding Product}" 
-                                               Margin="0,10,0,0"
-                                               LineBreakMode="NoWrap" 
-                                               Style="{DynamicResource ListItemTextStyle}" 
-                                               FontSize="18" />
-                                        <StackLayout Margin="0,2,0,0"
-                                                     Orientation="Horizontal">
-                                            <Label Text="Ends:"
-                                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                                   FontSize="13" >
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label"
-                                                                 Binding="{Binding Priority}"
-                                                                 Value="0">
-                                                        <Setter Property="Text"
-                                                                Value="Ended:"/>
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
-
-                                            <Label Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
-                                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                                   FontSize="13" />
-                                        </StackLayout>
-                                    </StackLayout>
-
-                                    <StackLayout HorizontalOptions="EndAndExpand"
-                                                 VerticalOptions="CenterAndExpand"
-                                                 Margin="0,0,43,0">
-                                        <StackLayout.Triggers>
-                                            <DataTrigger TargetType="StackLayout"
-                                                         Binding="{Binding Priority}"
-                                                         Value="0">
-                                                <Setter Property="IsVisible"
-                                                        Value="False"/>
-                                            </DataTrigger>
-                                        </StackLayout.Triggers>
-                                        <Label Text="{Binding LargestUnitRemaining}" 
-                                               VerticalTextAlignment="Center" 
-                                               HorizontalOptions="Center"
-                                               Margin="0,2,0,0"
-                                               Style="{DynamicResource ListItemTextStyle}" 
-                                               FontSize="25" />
-                                        <StackLayout Orientation="Horizontal"
-                                                     HorizontalOptions="CenterAndExpand" 
-                                                     x:Name="TimeRemaining">
-                                            <Label Text="{Binding LargestUnit}" 
-                                                   VerticalTextAlignment="Center" 
-                                                   Style="{DynamicResource ListItemTextStyle}" 
-                                                   FontSize="14" />
-                                            <Label Text="Remain" 
-                                                   VerticalTextAlignment="Center" 
-                                                   Style="{DynamicResource ListItemTextStyle}" 
-                                                   FontSize="14" />
-                                        </StackLayout>
-                                    </StackLayout>
-                                </StackLayout>
-                                <BoxView BackgroundColor="White"
-                                         HeightRequest="100"
-                                         WidthRequest="400"
-                                         IsVisible="False">
-                                    <BoxView.Triggers>
-                                        <DataTrigger TargetType="BoxView"
-                                                     Binding="{Binding Priority}"
-                                                     Value="1">
-                                            <Setter Property="Color"
-                                                    Value="LimeGreen"/>
-                                            <Setter Property="IsVisible"
-                                                    Value="True"/>
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="BoxView"
-                                                     Binding="{Binding Priority}"
-                                                     Value="2">
-                                            <Setter Property="Color"
-                                                    Value="Yellow"/>
-                                            <Setter Property="IsVisible"
-                                                    Value="True"/>
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="BoxView"
-                                                     Binding="{Binding Priority}"
-                                                     Value="3">
-                                            <Setter Property="Color"
-                                                    Value="Red"/>
-                                            <Setter Property="IsVisible"
-                                                    Value="True"/>
-                                        </DataTrigger>
-                                    </BoxView.Triggers>
-                                </BoxView>
+                                <Label Text="{Binding Product}" 
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="18" 
+                                       Margin="0,0,0,-2"/>
+                                <BoxView Color="{StaticResource Primary}"
+                                         HeightRequest="2"
+                                         HorizontalOptions="Fill" />
                             </StackLayout>
-                        </AbsoluteLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                         Grid.Row="1">
+                                <Label Text="Ends:"
+                                       TextColor="Black"
+                                       FontSize="13" >
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Priority}"
+                                                     Value="0">
+                                            <Setter Property="Text"
+                                                    Value="Ended:"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                                <Label Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       TextColor="Black"
+                                       FontSize="13" />
+                            </StackLayout>
+
+                            <Label Text="{Binding LargestUnitRemaining}" 
+                                   HorizontalOptions="Center"
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="22" 
+                                   Grid.Column="1"/>
+                            
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="Center"
+                                         Grid.Column="1"
+                                         Grid.Row="1">
+                                <Label Text="{Binding LargestUnit}" 
+                                       Style="{DynamicResource ListItemTextStyle}" 
+                                       FontSize="14" />
+                                <Label Text="Left" 
+                                       Style="{DynamicResource ListItemTextStyle}" 
+                                       FontSize="14" />
+                            </StackLayout>
+                        </Grid>
                     </Frame>
                 </ViewCell>
             </DataTemplate>

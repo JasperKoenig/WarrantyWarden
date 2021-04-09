@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WarrantyWarden.Views.AddWarranty"
-             BackgroundColor="AliceBlue">
+             BackgroundColor="{StaticResource Background}"
+             Title="New Warranty">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -13,7 +14,7 @@
     <StackLayout Margin="10">
         <Frame Grid.Column="0"
                CornerRadius="10"
-               Padding="8">
+               Padding="5">
             <Entry Text="{Binding Product}"
                    x:Name="productName"
                    Placeholder="Product Name"
@@ -93,34 +94,44 @@
             </StackLayout>
         </Frame>
 
-        <Button Text="Add proof of Purchase" 
-                Margin="0, 0, 0, 0"
-                Clicked="OnProofButtonClicked" 
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="EndAndExpand"
-                TextColor="Gray"
+        <Frame Padding="0">
+            <Button Text="Add proof of Purchase" 
+                    Margin="0, 0, 0, 0"
+                    Clicked="OnProofButtonClicked" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    TextColor="Black"
                     BackgroundColor="White"/>
-        
-        <Button Text="Add Warranty Card" 
-                Margin="0, 0, 0, 0"
-                Clicked="OnWarrantyButtonClicked" 
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="End"
-                TextColor="Gray"
-                BackgroundColor="White"/>
+        </Frame>
+
+        <Frame Padding="0">
+            <Button Text="Add Warranty Card" 
+                    Margin="0, 0, 0, 0"
+                    Clicked="OnWarrantyButtonClicked" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="End"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+        </Frame>
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="End">
-            <Button Text="Cancel" 
+            <Frame Padding="0"
+                   HorizontalOptions="FillAndExpand">
+                <Button Text="Cancel" 
                     Clicked="OnCancelButtonClicked" 
                     HorizontalOptions="FillAndExpand"
-                    TextColor="Gray"
+                    TextColor="Black"
                     BackgroundColor="White"/>
-            <Button Text="Save" 
+            </Frame>
+            <Frame Padding="0"
+                   HorizontalOptions="FillAndExpand">
+                <Button Text="Save" 
                     Clicked="OnSaveButtonClicked" 
                     HorizontalOptions="FillAndExpand"
-                    TextColor="Gray"
+                    TextColor="Black"
                     BackgroundColor="White"/>
+            </Frame>
         </StackLayout>
     </StackLayout>
 </ContentPage>

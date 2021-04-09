@@ -7,9 +7,10 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Primary">#FF7F29</Color>
+            <Color x:Key="Background">#E7E7E7</Color>
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -27,6 +28,36 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            
+            
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeBrands">
+                <On Platform="Android" 
+                    Value="FontAwesome5Brands.otf#Regular" />
+                <On Platform="iOS" 
+                    Value="FontAwesome5Brands" />
+                <On Platform="UWP" 
+                    Value="/Assets/FontAwesome5Brands.otf#Font Awesome 5 Brands" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeSolid">
+                <On Platform="Android" 
+                    Value="FontAwesome5Solid.otf#Regular" />
+                <On Platform="iOS" 
+                    Value="FontAwesome5Solid" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeRegular">
+                <On Platform="Android" 
+                    Value="FontAwesome5Regular.otf#Regular" />
+                <On Platform="iOS" 
+                    Value="FontAwesome5Regular" />
+            </OnPlatform>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

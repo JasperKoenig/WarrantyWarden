@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WarrantyWarden.Views.ViewWarranty"
-             BackgroundColor="AliceBlue">
+             BackgroundColor="{StaticResource Background}"
+             Title="{Binding Product}">
     
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -11,13 +12,6 @@
     </ContentPage.Padding>
 
     <StackLayout Margin="10">
-        <Label Text="{Binding Product}"
-               x:Name="productName"
-               Style="{DynamicResource TitleStyle}"
-               FontAttributes="Bold"
-               Margin="30, 10"
-               HorizontalTextAlignment="Center" />
-
         <Frame Grid.Column="0"
                CornerRadius="10"
                Padding="12">
@@ -40,17 +34,34 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Frame Grid.Column="0"
-                   CornerRadius="20"
-                   Padding="0">
-                <Image Source="{Binding ProofOfPurchaseLocation}" 
-                       Aspect="AspectFill"/>
+            <Frame CornerRadius="20"
+                   Padding="0"
+                   Grid.Column="0">
+                <StackLayout>
+                    <Frame CornerRadius="20"
+                           Padding="0">
+                        <Image Source="{Binding ProofOfPurchaseLocation}" 
+                               Aspect="AspectFill"/>
+                    </Frame>
+                    <Label Text="Proof of Purchase"
+                           HorizontalOptions="Center"
+                           Margin="0,5,0,10"/>
+                </StackLayout>
             </Frame>
-            <Frame Grid.Column="1"
-                   CornerRadius="20"
-                   Padding="0">
-                <Image Source="{Binding WarrantyCardLocation}"
-                       Aspect="AspectFill"/>
+
+            <Frame CornerRadius="20"
+                   Padding="0"
+                   Grid.Column="1">
+                <StackLayout>
+                    <Frame CornerRadius="20"
+                           Padding="0">
+                        <Image Source="{Binding WarrantyCardLocation}" 
+                               Aspect="AspectFill"/>
+                    </Frame>
+                    <Label Text="Warranty Card"
+                           HorizontalOptions="Center"
+                           Margin="0,5,0,10"/>
+                </StackLayout>
             </Frame>
         </Grid>
 
