@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="WarrantyWarden.Views.EUConsentPopup">
+    <!--You can set an animation in the xaml file or in the csharp code behind-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+    <Frame 
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" 
+        Padding="20, 20, 20, 20">
+        <StackLayout>
+            <Label Text="Ad Consent Page"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="We care about your privacy and the security of your data. We keep this app free by showing ads."
+                   FontSize="12"
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="Can we use your data to show you ads you might actually find useful?"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"/>
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="You can change your choice at any time in the settings tab. Our Partners will collect data and use a unique identifier on your device to serve you ads. " />
+                        <Span Text="Learn how AdMob and our partners collect and use data in our privacy policy"
+                              TextColor="#0E6CE6">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                      CommandParameter="https://jasperkoenig.github.io/WarrantyWarden-Privacy-Policy/" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Frame Padding="0"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="0,5,0,5"
+                   BorderColor="Black">
+                <Button Text="Yes, I would like to see relevant ads"
+                        Clicked="OnConsentButtonClicked"
+                        HorizontalOptions="FillAndExpand"
+                        TextColor="#0E6CE6"
+                        BackgroundColor="White"/>
+            </Frame>
+            
+            <Frame Padding="0"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="0,5,0,5"
+                   BorderColor="Gray">
+                <Button Text="No, see ads that are less relevant" 
+                        Clicked="OnRejectButtonClicked"
+                        HorizontalOptions="FillAndExpand"
+                        TextColor="#0E6CE6"
+                        BackgroundColor="White"/>
+            </Frame>
+
+            <Frame Padding="0"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="0,5,0,5"
+                   BorderColor="Gray">
+                <Button Text="Pay for the ad free version" 
+                        Clicked="OnIAPButtonClicked"
+                        HorizontalOptions="FillAndExpand"
+                        TextColor="#0E6CE6"
+                        BackgroundColor="White"/>
+            </Frame>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

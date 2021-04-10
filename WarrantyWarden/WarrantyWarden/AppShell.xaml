@@ -84,6 +84,12 @@
     <FlyoutItem Title="Notifications">
         <ShellContent Route="Notifications" ContentTemplate="{DataTemplate local:Notifications}" />
     </FlyoutItem>
+    <FlyoutItem Title="Ad Settings">
+        <ShellContent Route="EUConsentPage" ContentTemplate="{DataTemplate local:EUConsentPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Become Paid User">
+        <ShellContent Route="BecomePaidUser" ContentTemplate="{DataTemplate local:BecomePaidUser}" />
+    </FlyoutItem>
 
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

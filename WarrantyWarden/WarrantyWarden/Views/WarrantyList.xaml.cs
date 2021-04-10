@@ -4,6 +4,8 @@ using WarrantyWarden.Data;
 using Xamarin.Forms;
 using MarcTron.Plugin;
 using System.Linq;
+using Xamarin.Essentials;
+using Rg.Plugins.Popup.Services;
 
 namespace WarrantyWarden.Views
 {
@@ -13,16 +15,32 @@ namespace WarrantyWarden.Views
         {
             InitializeComponent();
 
+            BannerAd.PersonalizedAds = Preferences.Get("PersonalizedAdsConsent", false);
+
+            if (Preferences.Get("FirstRun", true))
+            {
+                Preferences.Set("FirstRun", false);
+                PopupNavigation.Instance.PushAsync(new EUConsentPopup());
+            }
+
             CrossMTAdmob.Current.OnRewardedVideoAdLoaded += (s, args) =>
             {
                 CrossMTAdmob.Current.ShowRewardedVideo();
             };
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            DisableEvents();
+            return base.OnBackButtonPressed();
+        }
+
         // Called when page is loaded to calculate and display warranty summaries
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            SetEvents();
 
             WarrantyDatabase database = await WarrantyDatabase.Instance;
 
@@ -64,6 +82,28 @@ namespace WarrantyWarden.Views
             ListView.ItemsSource = await database.QueryAsync("SELECT * FROM [Warranty] ORDER BY [Priority] DESC, [EndDate] ASC");
         }
 
+        void SetEvents()
+        {
+            CrossMTAdmob.Current.OnRewarded += AdRewardSuccess;
+            CrossMTAdmob.Current.OnRewardedVideoAdClosed += AdRewardSomethingWentWrong;
+            CrossMTAdmob.Current.OnRewardedVideoAdFailedToLoad += AdRewardSomethingWentWrong;
+            CrossMTAdmob.Current.OnRewardedVideoAdLeftApplication += AdRewardSomethingWentWrong;
+        }
+
+        private void DisableEvents()
+        {
+            CrossMTAdmob.Current.OnRewarded -= AdRewardSuccess;
+            CrossMTAdmob.Current.OnRewardedVideoAdClosed -= AdRewardSomethingWentWrong;
+            CrossMTAdmob.Current.OnRewardedVideoAdFailedToLoad -= AdRewardSomethingWentWrong;
+            CrossMTAdmob.Current.OnRewardedVideoAdLeftApplication -= AdRewardSomethingWentWrong;
+        }
+
+        // Sends an alert if the ad gets closed for any reason
+        private void AdRewardSomethingWentWrong(object sender, EventArgs e)
+        {
+            DisplayAlert("Oops", "Something went wrong serving you this ad, please try again", "Continue");
+        }
+
         // Plus Button clicked to add warranty
         async void OnItemAdded(object sender, EventArgs e)
         {
@@ -71,11 +111,61 @@ namespace WarrantyWarden.Views
 
             var warranties = await database.GetItemsAsync();
 
-            if (warranties.Count() > 5)
+            // Check if the use is a paid user
+            if (Preferences.Get("PaidUser", false))
             {
+                await Navigation.PushAsync(new AddWarranty
+                {
+                    BindingContext = new Warranty()
+                });
+            }
 
-            } 
-            
+            // Check if the user has at least 5 warranty entries already
+            else if (warranties.Count() >= 5 && !(Preferences.Get("PaidUser", false)))
+            {
+                // Check if its the first time they've reached 5 entries
+                if (Preferences.Get("FirstFive", true))
+                {
+                    Preferences.Set("FirstFive", false);
+                    // Ask whether they want to become a paying user
+                    var answer = await DisplayAlert("Oops", "To fund development, you need to watch a video for every warranty you add after the first five.", "Become paid user", "Continue");
+                    if (answer)
+                    {
+                        // Insert in app purchase page here, remove temp next line
+                        Preferences.Set("PaidUser", true);
+                    }
+                    else
+                    {
+                        ShowRewardAd();
+                    }
+                }
+                else
+                {
+                    ShowRewardAd();
+                }
+            }
+            else
+            {
+                DisableEvents();
+
+                await Navigation.PushAsync(new AddWarranty
+                {
+                    BindingContext = new Warranty()
+                });
+            }
+        }
+
+        void ShowRewardAd()
+        {
+            CrossMTAdmob.Current.UserPersonalizedAds = Preferences.Get("PersonalizedAdsConsent", false);
+            CrossMTAdmob.Current.LoadRewardedVideo("ca-app-pub-2438123329717714/8121719713");
+            CrossMTAdmob.Current.UserPersonalizedAds = Preferences.Get("PersonalizedAdsConsent", false);
+        }
+
+        async void AdRewardSuccess(object sender, EventArgs e)
+        {
+            DisableEvents();
+
             await Navigation.PushAsync(new AddWarranty
             {
                 BindingContext = new Warranty()
@@ -85,6 +175,8 @@ namespace WarrantyWarden.Views
         // Tapping on list item to view details
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            DisableEvents();
+
             if (e.SelectedItem != null)
             {
                 await Navigation.PushAsync(new ViewWarranty

@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#FF7F29</Color>
+            <Color x:Key="Secondary">#FF632B</Color>
             <Color x:Key="Background">#E7E7E7</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="Black"></Setter>
@@ -28,11 +29,11 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
-            
-            
+
             <OnPlatform x:TypeArguments="x:String" 
                         x:Key="FontAwesomeBrands">
                 <On Platform="Android" 

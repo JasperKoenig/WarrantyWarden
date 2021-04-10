@@ -104,8 +104,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <admob:MTAdView AdsId="ca-app-pub-3940256099942544/6300978111"
+        <admob:MTAdView x:Name="BannerAd" 
+                        AdsId="ca-app-pub-3940256099942544/6300978111"
                         HeightRequest="90"
-                        Grid.Row="1"/>
+                        Grid.Row="1" 
+                        PersonalizedAds="false"/>
     </Grid>
 </ContentPage>

@@ -15,7 +15,12 @@ namespace WarrantyWarden.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            // Set status bar color
+            Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#FF632B"));
+            // Initialize ads
             MobileAds.Initialize(ApplicationContext);
+            // Initialize popups
+            Rg.Plugins.Popup.Popup.Init(this);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
