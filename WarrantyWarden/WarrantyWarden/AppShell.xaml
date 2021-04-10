@@ -81,13 +81,10 @@
     <FlyoutItem Title="Warranty List">
         <ShellContent Route="WarrantyList" ContentTemplate="{DataTemplate local:WarrantyList}" />
     </FlyoutItem>
-    <FlyoutItem Title="Notifications">
-        <ShellContent Route="Notifications" ContentTemplate="{DataTemplate local:Notifications}" />
-    </FlyoutItem>
     <FlyoutItem Title="Ad Settings">
         <ShellContent Route="EUConsentPage" ContentTemplate="{DataTemplate local:EUConsentPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Become Paid User">
+    <FlyoutItem Title="Manage Pay Status">
         <ShellContent Route="BecomePaidUser" ContentTemplate="{DataTemplate local:BecomePaidUser}" />
     </FlyoutItem>
 

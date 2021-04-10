@@ -12,62 +12,72 @@
     </ContentPage.Padding>
 
     <StackLayout Margin="10">
-        <Frame Grid.Column="0"
-               CornerRadius="10"
-               Padding="12">
-            <StackLayout>
-                <Label Text="End Date"
-                       FontSize="17" 
-                       FontAttributes="Bold"/>
-                <BoxView Color="Gray"
-                         HeightRequest="2"
-                         HorizontalOptions="Fill" />
-
-                <Label FontSize="20"
-                       Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
-                       HorizontalTextAlignment="Center"/>
-            </StackLayout>
-        </Frame>
-        
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Frame CornerRadius="20"
-                   Padding="0"
-                   Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0"
+                   CornerRadius="10"
+                   Padding="12">
                 <StackLayout>
-                    <Frame CornerRadius="20"
-                           Padding="0">
-                        <Image Source="{Binding ProofOfPurchaseLocation}" 
-                               Aspect="AspectFill"/>
-                    </Frame>
-                    <Label Text="Proof of Purchase"
-                           HorizontalOptions="Center"
-                           Margin="0,5,0,10"/>
+                    <Label Text="End Date"
+                           FontSize="17" 
+                           FontAttributes="Bold"/>
+                    <BoxView Color="Gray"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />
+
+                    <Label FontSize="20"
+                           Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
+                           HorizontalTextAlignment="Center"/>
                 </StackLayout>
             </Frame>
 
-            <Frame CornerRadius="20"
-                   Padding="0"
-                   Grid.Column="1">
-                <StackLayout>
-                    <Frame CornerRadius="20"
-                           Padding="0">
-                        <Image Source="{Binding WarrantyCardLocation}" 
-                               Aspect="AspectFill"/>
-                    </Frame>
-                    <Label Text="Warranty Card"
-                           HorizontalOptions="Center"
-                           Margin="0,5,0,10"/>
-                </StackLayout>
-            </Frame>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame CornerRadius="20"
+                       Padding="0"
+                       Grid.Column="0">
+                    <StackLayout>
+                        <Frame CornerRadius="20"
+                               Padding="0">
+                            <Image Source="{Binding ProofOfPurchaseLocation}" 
+                                   Aspect="AspectFill"/>
+                        </Frame>
+                        <Label Text="Proof of Purchase"
+                               HorizontalOptions="Center"
+                               Margin="0,5,0,10"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="20"
+                       Padding="0"
+                       Grid.Column="1">
+                    <StackLayout>
+                        <Frame CornerRadius="20"
+                               Padding="0">
+                            <Image Source="{Binding WarrantyCardLocation}" 
+                                   Aspect="AspectFill"/>
+                        </Frame>
+                        <Label Text="Warranty Card"
+                               HorizontalOptions="Center"
+                               Margin="0,5,0,10"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
         </Grid>
+        <Button Text="Share Images" 
+                Clicked="OnShareButtonClicked" 
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="FillAndExpand"/>
 
         <Button Text="Back" 
                 Clicked="OnBackButtonClicked" 
-                VerticalOptions="EndAndExpand"
+                VerticalOptions="End"
                 HorizontalOptions="FillAndExpand"/>
     </StackLayout>
 </ContentPage>

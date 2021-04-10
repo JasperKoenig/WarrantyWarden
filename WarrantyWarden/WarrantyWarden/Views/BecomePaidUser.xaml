@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WarrantyWarden.Views.BecomePaidUser">
+             x:Class="WarrantyWarden.Views.BecomePaidUser"
+             Title="Manage Pay Status">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="Center">
             <Button Text="Become Paid"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     Clicked="BecomePaid"/>
             <Button Text="Become Free"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     Clicked="BecomeFree"/>
         </StackLayout>
     </ContentPage.Content>

@@ -67,46 +67,38 @@ namespace WarrantyWarden.Views
 
         async void OnProofButtonClicked(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Select a Medium", "Cancel", null, "Take a Photo", "Select a Photo", "Choose a PDF");
+            string action = await DisplayActionSheet("Select a Medium", "Cancel", null, "Take a Photo", "Select a Photo");
             switch (action)
             {
                 case "Take a Photo":
                     ProofOfPurchaseLocation = await TakePhotoAsync(ProofOfPurchaseFolder);
-                    await DisplayAlert("Location", ProofOfPurchaseLocation, "Continue");
+                    //await DisplayAlert("Location", ProofOfPurchaseLocation, "Continue");
                     break;
                 case "Select a Photo":
                     ProofOfPurchaseLocation = await PickPhotoAsync(ProofOfPurchaseFolder);
-                    await DisplayAlert("Location", ProofOfPurchaseLocation, "Continue");
-                    break;
-                case "Choose a PDF":
-
+                    //await DisplayAlert("Location", ProofOfPurchaseLocation, "Continue");
                     break;
             }
         }
 
         async void OnWarrantyButtonClicked(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Select a Medium", "Cancel", null, "Take a Photo", "Select a Photo", "Choose a PDF");
+            string action = await DisplayActionSheet("Select a Medium", "Cancel", null, "Take a Photo", "Select a Photo");
             switch (action)
             {
                 case "Take a Photo":
                     WarrantyCardLocation = await TakePhotoAsync(WarrantyCardFolder);
-                    await DisplayAlert("Location", WarrantyCardLocation, "Continue");
+                    //await DisplayAlert("Location", WarrantyCardLocation, "Continue");
                     break;
                 case "Select a Photo":
                     WarrantyCardLocation = await PickPhotoAsync(WarrantyCardFolder);
-                    await DisplayAlert("Location", WarrantyCardLocation, "Continue");
-                    break;
-                case "Choose a PDF":
-
+                    //await DisplayAlert("Location", WarrantyCardLocation, "Continue");
                     break;
             }
         }
 
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-
-
             Warranty newWarranty = new Warranty()
             {
                 Product = productName.Text,

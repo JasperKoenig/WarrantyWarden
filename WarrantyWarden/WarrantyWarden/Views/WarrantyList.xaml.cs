@@ -20,6 +20,7 @@ namespace WarrantyWarden.Views
             if (Preferences.Get("FirstRun", true))
             {
                 Preferences.Set("FirstRun", false);
+                Preferences.Set("Warranties", 5);
                 PopupNavigation.Instance.PushAsync(new EUConsentPopup());
             }
 
@@ -119,25 +120,15 @@ namespace WarrantyWarden.Views
                     BindingContext = new Warranty()
                 });
             }
-
             // Check if the user has at least 5 warranty entries already
-            else if (warranties.Count() >= 5 && !(Preferences.Get("PaidUser", false)))
+            else if ((warranties.Count() >= Preferences.Get("Warranties", 5)) && !(Preferences.Get("PaidUser", false)))
             {
-                // Check if its the first time they've reached 5 entries
-                if (Preferences.Get("FirstFive", true))
+                // Ask whether they want to become a paying user
+                var answer = await DisplayAlert("Oops", "Please watch an ad to enter 5 more warranties.", "Become paid user", "Continue");
+                if (answer)
                 {
-                    Preferences.Set("FirstFive", false);
-                    // Ask whether they want to become a paying user
-                    var answer = await DisplayAlert("Oops", "To fund development, you need to watch a video for every warranty you add after the first five.", "Become paid user", "Continue");
-                    if (answer)
-                    {
-                        // Insert in app purchase page here, remove temp next line
-                        Preferences.Set("PaidUser", true);
-                    }
-                    else
-                    {
-                        ShowRewardAd();
-                    }
+                    // Insert in app purchase page here, remove temp next line
+                    Preferences.Set("PaidUser", true);
                 }
                 else
                 {
@@ -165,6 +156,10 @@ namespace WarrantyWarden.Views
         async void AdRewardSuccess(object sender, EventArgs e)
         {
             DisableEvents();
+
+            int temp = Preferences.Get("Warranties", 5);
+            temp = temp + 5;
+            Preferences.Set("Warranties", temp);
 
             await Navigation.PushAsync(new AddWarranty
             {

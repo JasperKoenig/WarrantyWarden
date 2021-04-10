@@ -30,9 +30,6 @@
     <Compile Update="Views\EUConsentPage.xaml.cs">
       <DependentUpon>EUConsentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Notifications.xaml.cs">
-      <DependentUpon>Notifications.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\AddWarranty.xaml.cs">
       <DependentUpon>AddWarranty.xaml</DependentUpon>
     </Compile>
@@ -58,9 +55,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EUConsentPopup.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Notifications.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ViewWarranty.xaml">

@@ -16,6 +16,8 @@
                CornerRadius="10"
                Padding="5">
             <Entry Text="{Binding Product}"
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
                    x:Name="productName"
                    Placeholder="Product Name"
                    Style="{DynamicResource TitleStyle}"
@@ -30,10 +32,11 @@
                 <Label Text="Start Date:" />
 
                 <DatePicker x:Name="startDatePicker"
-                    Format="D"
-                    Margin="30, 0, 0, 0"
-                    Date="{Binding StartDate}"
-                    DateSelected="OnDateSelected" />
+                            TextColor="Black"
+                            Margin="30, 0, 0, 0"
+                            Date="{Binding StartDate}"
+                            DateSelected="OnDateSelected" 
+                            InputTransparent="False" />
 
                 <Label Text="Remember, your warranty may start from date of purchase or date recieved."
                Margin="30, 0, 0, 20" />

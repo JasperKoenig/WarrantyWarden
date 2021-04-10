@@ -1,10 +1,10 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android.Gms.Ads;
+using AndroidX.AppCompat.App;
 
 namespace WarrantyWarden.Droid
 {
@@ -21,6 +21,8 @@ namespace WarrantyWarden.Droid
             MobileAds.Initialize(ApplicationContext);
             // Initialize popups
             Rg.Plugins.Popup.Popup.Init(this);
+            // Disable dark mode
+            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
