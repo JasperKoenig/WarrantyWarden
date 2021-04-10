@@ -2,6 +2,8 @@
 using WarrantyWarden.Models;
 using WarrantyWarden.Data;
 using Xamarin.Forms;
+using MarcTron.Plugin;
+using System.Linq;
 
 namespace WarrantyWarden.Views
 {
@@ -10,8 +12,14 @@ namespace WarrantyWarden.Views
         public WarrantyList()
         {
             InitializeComponent();
+
+            CrossMTAdmob.Current.OnRewardedVideoAdLoaded += (s, args) =>
+            {
+                CrossMTAdmob.Current.ShowRewardedVideo();
+            };
         }
 
+        // Called when page is loaded to calculate and display warranty summaries
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -20,6 +28,7 @@ namespace WarrantyWarden.Views
 
             var warranties = await database.GetItemsAsync();
 
+            // Calculate time remaining for each warranty and set unit (Days, Moths, Years)
             foreach (Warranty warranty in warranties)
             {                
                 if (Convert.ToInt32(Math.Floor(warranty.EndDate.Subtract(DateTime.Today).Days / (365.25))) >= 2)
@@ -55,14 +64,25 @@ namespace WarrantyWarden.Views
             ListView.ItemsSource = await database.QueryAsync("SELECT * FROM [Warranty] ORDER BY [Priority] DESC, [EndDate] ASC");
         }
 
+        // Plus Button clicked to add warranty
         async void OnItemAdded(object sender, EventArgs e)
         {
+            WarrantyDatabase database = await WarrantyDatabase.Instance;
+
+            var warranties = await database.GetItemsAsync();
+
+            if (warranties.Count() > 5)
+            {
+
+            } 
+            
             await Navigation.PushAsync(new AddWarranty
             {
                 BindingContext = new Warranty()
             });
         }
 
+        // Tapping on list item to view details
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
@@ -74,6 +94,7 @@ namespace WarrantyWarden.Views
             }
         }
 
+        // Deletes the selected item after confirmation message
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var answer = await DisplayAlert("Delete", "Do you want to delete the warranty?", "Yes", "No");
@@ -93,6 +114,7 @@ namespace WarrantyWarden.Views
             }
         }
 
+        // Code to refresh data
         protected void ListItems_Refreshing(object sender, EventArgs e)
         {
             RefreshData();

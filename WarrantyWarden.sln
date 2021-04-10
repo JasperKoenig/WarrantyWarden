@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarrantyWarden.Android", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarrantyWarden.iOS", "WarrantyWarden\WarrantyWarden.iOS\WarrantyWarden.iOS.csproj", "{09FB60FD-26BC-4A91-B2AC-15DE0D765332}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarrantyWarden", "WarrantyWarden\WarrantyWarden\WarrantyWarden.csproj", "{52934C9C-1612-4971-8AF9-79C920D0F041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarrantyWarden", "WarrantyWarden\WarrantyWarden\WarrantyWarden.csproj", "{52934C9C-1612-4971-8AF9-79C920D0F041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

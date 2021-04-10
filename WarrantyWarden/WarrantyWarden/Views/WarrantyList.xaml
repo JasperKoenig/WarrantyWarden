@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
              x:Class="WarrantyWarden.Views.WarrantyList"
+             xmlns:admob="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              BackgroundColor="{StaticResource Background}"
              Title="Warranties">
     <ContentPage.ToolbarItems>
@@ -14,87 +15,97 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <ListView x:Name="ListView"
-              Margin="10"
-              RowHeight="80"
-              IsPullToRefreshEnabled="true"
-              Refreshing="ListItems_Refreshing"
-              ItemSelected="OnListItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <ViewCell.ContextActions>
-                        <MenuItem Clicked="OnDeleteButtonClicked"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <ListView x:Name="ListView"
+                  Margin="10"
+                  RowHeight="80"
+                  IsPullToRefreshEnabled="true"
+                  Refreshing="ListItems_Refreshing"
+                  ItemSelected="OnListItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnDeleteButtonClicked"
                                   CommandParameter="{Binding .}"
                                   Text="Delete" IsDestructive="True" />
-                    </ViewCell.ContextActions>
+                        </ViewCell.ContextActions>
 
-                    <Frame CornerRadius="10"
+                        <Frame CornerRadius="10"
                            Padding="10"
                            HasShadow="True"
                            Margin="0,5,0,5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackLayout>
-                                <Label Text="{Binding Product}" 
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout>
+                                    <Label Text="{Binding Product}" 
                                    LineBreakMode="NoWrap" 
                                    Style="{DynamicResource ListItemTextStyle}" 
                                    FontSize="18" 
                                        Margin="0,0,0,-2"/>
-                                <BoxView Color="{StaticResource Primary}"
+                                    <BoxView Color="{StaticResource Primary}"
                                          HeightRequest="2"
                                          HorizontalOptions="Fill" />
-                            </StackLayout>
+                                </StackLayout>
 
-                            <StackLayout Orientation="Horizontal"
+                                <StackLayout Orientation="Horizontal"
                                          Grid.Row="1">
-                                <Label Text="Ends:"
+                                    <Label Text="Ends:"
                                        TextColor="Black"
                                        FontSize="13" >
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
                                                      Binding="{Binding Priority}"
                                                      Value="0">
-                                            <Setter Property="Text"
+                                                <Setter Property="Text"
                                                     Value="Ended:"/>
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
 
-                                <Label Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
+                                    <Label Text="{Binding EndDate, StringFormat='{0:MMMM dd, yyyy}'}"
                                        Style="{DynamicResource ListItemDetailTextStyle}"
                                        TextColor="Black"
                                        FontSize="13" />
-                            </StackLayout>
+                                </StackLayout>
 
-                            <Label Text="{Binding LargestUnitRemaining}" 
+                                <Label Text="{Binding LargestUnitRemaining}" 
                                    HorizontalOptions="Center"
                                    Style="{DynamicResource ListItemTextStyle}" 
                                    FontSize="22" 
                                    Grid.Column="1"/>
-                            
-                            <StackLayout Orientation="Horizontal"
+
+                                <StackLayout Orientation="Horizontal"
                                          HorizontalOptions="Center"
                                          Grid.Column="1"
                                          Grid.Row="1">
-                                <Label Text="{Binding LargestUnit}" 
+                                    <Label Text="{Binding LargestUnit}" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="14" />
-                                <Label Text="Left" 
+                                    <Label Text="Left" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="14" />
-                            </StackLayout>
-                        </Grid>
-                    </Frame>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <admob:MTAdView AdsId="ca-app-pub-3940256099942544/6300978111"
+                        HeightRequest="90"
+                        Grid.Row="1"/>
+    </Grid>
 </ContentPage>
